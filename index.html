@@ -10,17 +10,25 @@
 </head>
 <body>
   <div class="list">
-    <h4>Учет моих расходов</h4>
+    <h3>Учет моих расходов</h3>
     
     <div class="dataInput">
-      <div class="block"></div>
-      <div class="block"></div>
-      <div class="but"></div>
+      <div class="block">
+        <h6>Куда было потрачено:</h6>
+        <input  id="add-shop" type="text" placeholder="Куда было потрачено">
+      </div>
+      <div class="block">
+        <h6>Сколько было потрачено:</h6>
+        <input  id="add-sum" type="text"placeholder="Сколько было потрачено">
+      </div>
+      <div class="button-add">
+        <button onclick="onClickButton()">Добавить</button>
+      </div>
     </div>
 
-    <div class="summ"></div>
+    <div id="summ"></div>
 
-    <div class="Expenses"></div>
+    <div id="expenses"></div>
   </div>
   
   <script src="https://cdn.jsdelivr.net/lodash/4.10.0/lodash.js"></script>
