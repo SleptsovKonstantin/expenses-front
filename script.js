@@ -1,10 +1,15 @@
 let allBuy = [];
 let input1 = null;
 let input2 = null;
-let valueInput1 = "";
-let valueInput2 = "";
+let valueInputShop = "";
+let valueInputSum = "";
 let sumList = 0;
-const d = new Date();
+const dateYesterday = new Date();
+let newDate = null;
+let flag = null;
+let intermedateResult1 = "";
+let intermedateResult2 = "";
+let intermedateResult3 = "";
 
 window.onload = async () => {
   input1 = document.getElementById("add-shop");
@@ -18,109 +23,217 @@ window.onload = async () => {
   });
   const result = await resp.json();
   allBuy = result.data;
-  console.log(allBuy);
   render();
 };
 
 const updateValue1 = (event) => {
-  valueInput1 = event.target.value;
+  valueInputShop = event.target.value;
 };
 
 const updateValue2 = (event) => {
-  valueInput2 = event.target.value;
+  valueInputSum = +event.target.value;
 };
 
-// time
 const formatDate = (date) => {
-  var dd = date.getDate();
+  let dd = date.getDate();
   if (dd < 10) dd = "0" + dd;
-  var mm = date.getMonth() + 1;
+  let mm = date.getMonth() + 1;
   if (mm < 10) mm = "0" + mm;
-  var yy = date.getFullYear() % 100;
+  let yy = date.getFullYear();
   if (yy < 10) yy = "0" + yy;
   return dd + "." + mm + "." + yy;
 };
-const newD = formatDate(d);
+const newDateFormate = formatDate(dateYesterday);
 
-//add buy
 const onClickButton = async () => {
-  const resp = await fetch("http://localhost:4000/createTicket", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json;charset=utf-8",
-      "Access-Control-Allow-Origin": "*",
-    },
-    body: JSON.stringify({
-      shop: valueInput1,
-      date: newD,
-      sum: valueInput2,
-    }),
-  });
-  const result = await resp.json();
-  console.log(result.data);
-  allBuy = result.data;
-  input1.value = "";
-  valueInput1 = "";
-  input2.value = "";
-  valueInput2 = "";
-  render();
+  if (valueInputShop !== "" || valueInputSum !== "") {
+    if (Math.sign(valueInputSum) === 1) {
+      const resp = await fetch("http://localhost:4000/createTicket", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify({
+          shop: valueInputShop,
+          date: newDateFormate,
+          sum: valueInputSum,
+        }),
+      });
+      const result = await resp.json();
+      allBuy = result.data;
+      input1.value = "";
+      valueInputShop = "";
+      input2.value = "";
+      valueInputSum = "";
+      render();
+    } else {
+      alert("Необходимо внести число!");
+      input2.value = "";
+      valueInputSum = "";
+    }
+  } else {
+    alert("Пустая строка ввода! Добавьте, пожалуйста, значение");
+  }
 };
 
 const render = () => {
-  const allSum = document.getElementById("summ");
+  const total = document.getElementById("summ");
   const content = document.getElementById("expenses");
-  console.log(content);
 
   while (content.firstChild) {
     content.removeChild(content.firstChild);
   }
-  console.log(allBuy);
+
+  while (total.firstChild) {
+    total.removeChild(total.firstChild);
+  }
+
   allBuy.map((item, index) => {
-    const container = document.createElement("div");
-    container.id = `task-${index}`;
+    const ticket = document.createElement("div");
 
     const check = document.createElement("p");
     const list = `${++index})`;
     check.innerText = list;
-    container.appendChild(check);
+    ticket.appendChild(check);
 
-    const shop = document.createElement("p");
-    const shopVal = `Магазин "${item.shop}"`;
-    shop.innerText = shopVal;
-    container.appendChild(shop);
+    if (index === flag) {
+      const editInput1 = document.createElement("input");
+      editInput1.type = "text";
+      editInput1.value = item.shop;
+      editInput1.addEventListener("change", updateTaskText1);
+      ticket.appendChild(editInput1);
 
-    const date = document.createElement("p");
-    date.innerText = item.date;
-    container.appendChild(date);
+      const editInput3 = document.createElement("input");
+      editInput3.type = "date";
+      let s = item.date.split(".").reverse().join("-");
+      editInput3.value = s;
+      editInput3.min = "2022-01-01";
+      editInput3.max = "2022-12-31";
+      editInput3.addEventListener("change", updateTaskText3);
+      ticket.appendChild(editInput3);
 
-    const sum = document.createElement("p");
-    const rub = `${item.sum} р.`;
-    sum.innerText = rub;
-    container.appendChild(sum);
+      const editInput2 = document.createElement("input");
+      editInput2.type = "text";
+      editInput2.value = item.sum;
+      editInput2.addEventListener("change", updateTaskText2);
+      ticket.appendChild(editInput2);
 
-    sumList += +item.sum;
+      const imageOk = document.createElement("img");
+      imageOk.src = "img/ok.png";
+      imageOk.type = "button";
+      imageOk.className = "buttonClick";
+      imageOk.onclick = () => {
+        saveResult(index);
+        doneEditTask();
+      };
+      ticket.appendChild(imageOk);
 
-    const imageEdit = document.createElement("img");
-    imageEdit.src = "img/change.png";
-    imageEdit.type = "button";
-    imageEdit.className = "buttonClick";
-    // imageEdit.onclick = () => {
-    //   flag = index;
-    //   render();
-    // };
-    container.appendChild(imageEdit);
+      const imageCancel = document.createElement("img");
+      imageCancel.src = "img/otmena.jpg";
+      imageCancel.type = "button";
+      imageCancel.className = "buttonClick";
+      imageCancel.onclick = () => doneEditTask();
+      ticket.appendChild(imageCancel);
+    } else {
+      const shop = document.createElement("p");
+      const shopVal = `Магазин "${item.shop}"`;
+      shop.innerText = shopVal;
+      ticket.appendChild(shop);
 
-    const imageDel = document.createElement("img");
-    imageDel.src = "img/krest.png";
-    imageDel.type = "button";
-    imageDel.className = "buttonClick";
-    // imageDel.onclick = () => deleteTask(index);
-    container.appendChild(imageDel);
+      const date = document.createElement("p");
+      date.innerText = item.date;
+      ticket.appendChild(date);
 
-    content.appendChild(container);
+      const sum = document.createElement("p");
+      const rub = `${item.sum} р.`;
+      sum.innerText = rub;
+      ticket.appendChild(sum);
+
+      const imageEdit = document.createElement("img");
+      imageEdit.src = "img/change.png";
+      imageEdit.type = "button";
+      imageEdit.className = "buttonClick";
+      imageEdit.onclick = () => {
+        flag = index;
+        render();
+      };
+      ticket.appendChild(imageEdit);
+
+      const imageDel = document.createElement("img");
+      imageDel.src = "img/krest.png";
+      imageDel.type = "button";
+      imageDel.className = "buttonClick";
+      imageDel.onclick = () => deleteTask(index);
+      ticket.appendChild(imageDel);
+    }
+    content.appendChild(ticket);
   });
 
+  const initialValue = 0;
+  const sumList = allBuy.reduce((accumulator, currentValue) => {
+    return accumulator + currentValue.sum;
+  }, initialValue);
   const summa = document.createElement("p");
   summa.innerText = `Итого: ${sumList} р.`;
-  allSum.appendChild(summa);
+  total.appendChild(summa);
+};
+
+const updateTaskText1 = (event) => {
+  intermedateResult1 = event.target.value;
+};
+
+const updateTaskText2 = (event) => {
+  intermedateResult2 = +event.target.value;
+};
+
+const updateTaskText3 = (event) => {
+  intermedateResult3 = event.target.value;
+  newDate = intermedateResult3.split("-").reverse().join(".");
+};
+
+const deleteTask = async (index) => {
+  let id = allBuy[index - 1]._id;
+  const resp = await fetch(`http://localhost:4000/deleteTicket?_id=${id}`, {
+    method: "DELETE",
+  });
+  const result = await resp.json();
+  allBuy = result.data;
+  render();
+};
+
+const saveResult = async (index) => {
+  if (
+    intermedateResult1 !== "" &&
+    intermedateResult2 !== "" &&
+    newDate !== ""
+  ) {
+    allBuy[index - 1].shop = intermedateResult1;
+    allBuy[index - 1].date = newDate;
+    allBuy[index - 1].sum = intermedateResult2;
+    let _id = allBuy[index - 1]._id;
+    const resp = await fetch(`http://localhost:4000/updateTicket`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify({
+        _id,
+        shop: intermedateResult1,
+        date: newDate,
+        sum: intermedateResult2,
+      }),
+    });
+    const result = await resp.json();
+    allBuy = result.data;
+    intermedateResult1 = "";
+    intermedateResult2 = "";
+    newDate = "";
+  }
+};
+
+const doneEditTask = () => {
+  flag = null;
+  render();
 };
