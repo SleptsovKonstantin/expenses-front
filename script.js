@@ -68,7 +68,7 @@ const onClickButton = async () => {
       valueInputSum = "";
       render();
     } else {
-      alert("Необходимо внести число!");
+      alert("Необходимо ввести число, йоу!");
       input2.value = "";
       valueInputSum = "";
     }
@@ -106,7 +106,7 @@ const render = () => {
 
       const editInput3 = document.createElement("input");
       editInput3.type = "date";
-      let s = item.date.split(".").reverse().join("-");
+      const s = item.date.split(".").reverse().join("-");
       editInput3.value = s;
       editInput3.min = "2022-01-01";
       editInput3.max = "2022-12-31";
@@ -124,6 +124,7 @@ const render = () => {
       imageOk.type = "button";
       imageOk.className = "buttonClick";
       imageOk.onclick = () => {
+        checkResult(index);
         saveResult(index);
         doneEditTask();
       };
@@ -139,15 +140,76 @@ const render = () => {
       const shop = document.createElement("p");
       const shopVal = `Магазин "${item.shop}"`;
       shop.innerText = shopVal;
+      shop.addEventListener(
+        "dblclick",
+        (updateElementShop = () => {
+          const editInput1 = document.createElement("input");
+          editInput1.type = "text";
+          editInput1.value = item.shop;
+          editInput1.addEventListener("change", updateTaskText1);
+          editInput1.addEventListener(
+            "blur",
+            (reverseUpdateShop = () => {
+              checkResult(index);
+              saveResult(index);
+              doneEditTask();
+            })
+          );
+          ticket.replaceChild(editInput1, shop);
+          editInput1.focus();
+        })
+      );
       ticket.appendChild(shop);
 
       const date = document.createElement("p");
       date.innerText = item.date;
+      date.addEventListener(
+        "dblclick",
+        (updateElementDate = () => {
+          const editInput3 = document.createElement("input");
+          editInput3.type = "date";
+          const s = item.date.split(".").reverse().join("-");
+          editInput3.value = s;
+          editInput3.min = "2022-01-01";
+          editInput3.max = "2022-12-31";
+          editInput3.addEventListener("change", updateTaskText3);
+          editInput3.addEventListener(
+            "blur",
+            (reverseUpdateSum = () => {
+              checkResult(index);
+              saveResult(index);
+              doneEditTask();
+            })
+          );
+
+          ticket.replaceChild(editInput3, date);
+          editInput3.focus();
+        })
+      );
       ticket.appendChild(date);
 
       const sum = document.createElement("p");
       const rub = `${item.sum} р.`;
       sum.innerText = rub;
+      sum.addEventListener(
+        "dblclick",
+        (updateElementSum = () => {
+          const editInput2 = document.createElement("input");
+          editInput2.type = "text";
+          editInput2.value = item.sum;
+          editInput2.addEventListener("change", updateTaskText2);
+          editInput2.addEventListener(
+            "blur",
+            (reverseUpdateSum = () => {
+              checkResult(index);
+              saveResult(index);
+              doneEditTask();
+            })
+          );
+          ticket.replaceChild(editInput2, sum);
+          editInput2.focus();
+        })
+      );
       ticket.appendChild(sum);
 
       const imageEdit = document.createElement("img");
@@ -190,6 +252,21 @@ const updateTaskText2 = (event) => {
 const updateTaskText3 = (event) => {
   intermedateResult3 = event.target.value;
   newDate = intermedateResult3.split("-").reverse().join(".");
+  return newDate;
+};
+
+const checkResult = (index) => {
+  if (intermedateResult1 === "") {
+    intermedateResult1 = allBuy[index - 1].shop;
+  }
+
+  if (intermedateResult2 === "") {
+    intermedateResult2 = allBuy[index - 1].sum;
+  }
+
+  if (intermedateResult3 === "") {
+    newDate = newDateFormate;
+  }
 };
 
 const deleteTask = async (index) => {
@@ -230,6 +307,8 @@ const saveResult = async (index) => {
     intermedateResult1 = "";
     intermedateResult2 = "";
     newDate = "";
+  } else {
+    alert("есть путсые параметры");
   }
 };
 
