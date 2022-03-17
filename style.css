@@ -1,115 +1,294 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap");
+
 .list {
-    background: #657580;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
+  background: #657580;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  font: 16px "Open Sans", sans-serif;
+}
+
+.list h3 {
+  font-size: 25px;
 }
 
 .dataInput {
-    display: flex;
-    flex-direction: row;
-    margin: 10px;
-    padding: 10px;
-    border-radius: 10px;
-    box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  box-sizing: border-box;
 }
 
 .block {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
 h6 {
-    margin: 0px;
+  margin: 0px;
+  font-size: 15px;
 }
 
 input {
-    border-radius: 3px;
-    width: 200px;
+  border-radius: 3px;
+  width: 200px;
+  border: 0;
 }
 
-.button-add {
-    margin: 14px;
+.button-add button {
+  background-color: #477f64;
+  border: 0;
+  width: 75px;
+  height: 20px;
+  margin: 14px;
 }
 
 #expenses {
-    width: 700px;
-    height: 900px;
-    overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: auto;
+  height: 600px;
+  overflow-y: scroll;
 }
 
-#expenses div {
-    width: 675px;
-    height: auto;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-top: 5px;
+#expenses::-webkit-scrollbar {
+  width: 0;
 }
 
-#expenses div p {
-    display: flex;
-    flex-direction: column;
+#ticket {
+  margin-top: 5px;
+  width: 675px;
+  height: 90px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
-#expenses div input {
-    width: 130px;
-    margin-right: auto;
+#name {
+  width: 300px;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+}
+
+#dateSumButt {
+  width: 375px;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#dateSum {
+  width: 280px;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#butt {
+  width: 90px;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+#ticket input {
+  margin-right: auto;
+}
+
+#name input {
+  width: 134px;
+  height: 16px;
+  padding: 0;
+}
+
+#dateSum input {
+  width: 134px;
+  height: 16px;
+  padding: 0;
 }
 
 img {
-    width: 15px;
-    height: 15px;
-    margin: 25px;
-    cursor: pointer;
+  width: 15px;
+  height: 15px;
+  margin: 15px;
+  cursor: pointer;
 }
 
 p {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .numberTicket {
-    width: 50px;
-    align-items: flex-end;
-    padding-right: 5px;
+  width: 20px;
+  padding-left: 18px;
 }
 
 .shop {
-    width: 250px;
-    word-break: break-all;
+  width: 240px;
+  word-break: break-all;
 }
 
 .date {
-    width: 150px;
-    align-items: center;
+  width: 150px;
+  align-items: center;
 }
 
 .sum {
-    width: 90px;
-    align-items: center;
+  width: 90px;
+  align-items: center;
 }
 
 #summ {
-    display: flex;
-    flex-direction: row-reverse;
-    width: 700px;
+  display: flex;
+  flex-direction: row-reverse;
+  width: 700px;
+  font-size: 20px;
 }
 
 @media screen and (max-width: 730px) {
-    .dataInput {
-        flex-direction: column;
-    }
-    #expenses {
-        width: 500px;
-        height: 900px;
-    }
-    #expenses div {
-        width: auto
-    }
-    #summ {
-        width: 500px
-    }
-    #expenses div input {
-        width: 130px;
-    }
+  .button-add button {
+    margin: 0;
+  }
+
+  .dataInput {
+    flex-direction: column;
+  }
+  #expenses {
+    width: 500px;
+    height: 450px;
+  }
+  #ticket {
+    margin-top: 5px;
+    width: 470px;
+    height: auto;
+  }
+
+  #name {
+    width: 230px;
+  }
+
+  #dateSumButt {
+    width: auto;
+  }
+
+  #dateSum {
+    width: 160px;
+  }
+
+  #butt {
+    width: 70px;
+  }
+  #dateSum input {
+    width: 60px;
+  }
+
+  #summ {
+    width: 500px;
+  }
+
+  .dataInput {
+    margin: 0px;
+  }
+
+  .button-add {
+    margin: 10px;
+    padding-left: 128px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #expenses {
+    width: 300px;
+    height: 400px;
+  }
+
+  #ticket {
+    width: 285px;
+  }
+
+  #name {
+    width: 180px;
+  }
+
+  #dateSumButt {
+    flex-direction: column;
+    width: 110px;
+  }
+
+  #dateSum {
+    width: 110px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  #dateSum input {
+    margin: 0;
+    margin-bottom: 2px;
+  }
+
+  #name input {
+    margin: 0;
+    padding: 0;
+  }
+
+  #dateSum p {
+    margin: 0;
+  }
+
+  img {
+    margin: 5px;
+  }
+
+  #summ {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  #expenses {
+    width: 260px;
+    height: 300px;
+  }
+
+  #ticket {
+    width: 250px;
+    margin-bottom: 10px;
+  }
+
+  #name {
+    width: 160px;
+  }
+
+  #dateSumButt {
+    flex-direction: column;
+    width: 80px;
+  }
+
+  #dateSum {
+    width: 80px;
+    flex-direction: column;
+    text-align: center;
+  }
+  #dateSum p {
+    margin: 0;
+  }
+
+  img {
+    margin: 2px;
+  }
+
+  #summ {
+    width: 260px;
+  }
 }
