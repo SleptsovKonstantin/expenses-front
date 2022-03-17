@@ -264,6 +264,7 @@ p {
   #ticket {
     width: 250px;
     margin-bottom: 10px;
+    flex-direction: column;
   }
 
   #name {
@@ -281,7 +282,7 @@ p {
     text-align: center;
   }
   #dateSum p {
-    margin: 0;
+    margin: 8px;
   }
 
   img {
