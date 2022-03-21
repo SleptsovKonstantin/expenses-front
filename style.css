@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap");
-
 .list {
   background: #657580;
   display: flex;
@@ -61,7 +60,7 @@ input {
 #ticket {
   margin-top: 5px;
   width: 675px;
-  height: 90px;
+  height: auto;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -82,6 +81,7 @@ input {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-around;
 }
 
 #dateSum {
@@ -107,15 +107,23 @@ input {
 }
 
 #name input {
-  width: 134px;
+  width: 170px;
   height: 16px;
   padding: 0;
 }
 
-#dateSum input {
-  width: 134px;
-  height: 16px;
-  padding: 0;
+/* #dateSum input {
+    width: 130px;
+    height: 16px;
+    padding: 0;
+} */
+
+#inputDate {
+  width: 130px;
+}
+
+#inputSum {
+  width: 60px;
 }
 
 img {
@@ -160,7 +168,6 @@ p {
   .button-add button {
     margin: 0;
   }
-
   .dataInput {
     flex-direction: column;
   }
@@ -172,35 +179,34 @@ p {
     margin-top: 5px;
     width: 470px;
     height: auto;
+    flex-direction: column;
   }
-
   #name {
-    width: 230px;
+    width: 420px;
   }
-
   #dateSumButt {
-    width: auto;
+    width: 360px;
   }
-
   #dateSum {
-    width: 160px;
+    width: 260px;
   }
-
   #butt {
     width: 70px;
   }
-  #dateSum input {
-    width: 60px;
+
+  #inputDate {
+    width: 130px;
   }
 
+  #inputSum {
+    width: 60px;
+  }
   #summ {
     width: 500px;
   }
-
   .dataInput {
     margin: 0px;
   }
-
   .button-add {
     margin: 10px;
     padding-left: 128px;
@@ -210,46 +216,45 @@ p {
 @media screen and (max-width: 500px) {
   #expenses {
     width: 300px;
-    height: 400px;
+    height: 550px;
   }
-
   #ticket {
-    width: 285px;
+    width: 325px;
   }
-
   #name {
-    width: 180px;
+    width: 245px;
   }
-
   #dateSumButt {
     flex-direction: column;
     width: 110px;
   }
-
+  #dateSum p {
+    margin: 10px;
+}
   #dateSum {
     width: 110px;
     flex-direction: column;
     text-align: center;
   }
-
   #dateSum input {
     margin: 0;
     margin-bottom: 2px;
   }
-
   #name input {
     margin: 0;
     padding: 0;
   }
 
-  #dateSum p {
-    margin: 0;
+  #inputDate {
+    width: 170px;
   }
 
+  #inputSum {
+    width: 167px;
+  }
   img {
     margin: 5px;
   }
-
   #summ {
     width: 300px;
   }
@@ -258,24 +263,20 @@ p {
 @media screen and (max-width: 320px) {
   #expenses {
     width: 260px;
-    height: 300px;
+    height: 500px;
   }
-
   #ticket {
     width: 250px;
     margin-bottom: 10px;
     flex-direction: column;
   }
-
   #name {
-    width: 160px;
+    width: 240px;
   }
-
   #dateSumButt {
     flex-direction: column;
     width: 80px;
   }
-
   #dateSum {
     width: 80px;
     flex-direction: column;
@@ -284,11 +285,9 @@ p {
   #dateSum p {
     margin: 8px;
   }
-
   img {
     margin: 2px;
   }
-
   #summ {
     width: 260px;
   }

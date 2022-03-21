@@ -9,7 +9,7 @@ let newDate = null;
 let flag = null;
 let intermedateResultShop = "";
 let intermedateResultSum = "";
-let intermedateResult3 = "";
+let intermedateResultDate = "";
 
 window.onload = async () => {
   inputShop = document.getElementById("add-shop");
@@ -49,7 +49,7 @@ const formatDate = (date) => {
 const newDateFormate = formatDate(dateYesterday);
 
 const onClickButton = async () => {
-  if (valueInputShop !== "" || valueInputSum !== "") {
+  if (valueInputShop !== "" && valueInputSum !== "") {
     if (Math.sign(valueInputSum) === 1) {
       const resp = await fetch("http://localhost:4000/createTicket", {
         method: "POST",
@@ -125,6 +125,7 @@ const render = () => {
 
       const editInputDate = document.createElement("input");
       editInputDate.type = "date";
+      editInputDate.id = "inputDate";
       const s = item.date.split(".").reverse().join("-");
       editInputDate.value = s;
       editInputDate.min = "2022-01-01";
@@ -134,6 +135,7 @@ const render = () => {
 
       const editInputSum = document.createElement("input");
       editInputSum.type = "text";
+      editInputSum.id = "inputSum";
       editInputSum.value = item.sum;
       editInputSum.addEventListener("change", updateTaskText2);
       dateSum.appendChild(editInputSum);
@@ -189,6 +191,7 @@ const render = () => {
         (updateElementDate = () => {
           const editInputDate = document.createElement("input");
           editInputDate.type = "date";
+          editInputDate.id = "inputDate";
           const s = item.date.split(".").reverse().join("-");
           editInputDate.value = s;
           editInputDate.min = "2022-01-01";
@@ -218,6 +221,7 @@ const render = () => {
         (updateElementSum = () => {
           const editInputSum = document.createElement("input");
           editInputSum.type = "text";
+          editInputSum.id = "inputSum";
           editInputSum.value = item.sum;
           editInputSum.addEventListener("change", updateTaskText2);
           editInputSum.addEventListener(
@@ -272,8 +276,8 @@ const updateTaskText2 = (event) => {
 };
 
 const updateTaskText3 = (event) => {
-  intermedateResult3 = event.target.value;
-  newDate = intermedateResult3.split("-").reverse().join(".");
+  intermedateResultDate = event.target.value;
+  newDate = intermedateResultDate.split("-").reverse().join(".");
   return newDate;
 };
 
@@ -286,7 +290,7 @@ const checkResult = (index) => {
     intermedateResultSum = allBuy[index - 1].sum;
   }
 
-  if (intermedateResult3 === "") {
+  if (intermedateResultDate === "") {
     newDate = newDateFormate;
   }
 };
