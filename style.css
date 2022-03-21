@@ -1,0 +1,314 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap");
+.list {
+  background: #657580;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  font: 16px "Open Sans", sans-serif;
+}
+
+.list h3 {
+  font-size: 25px;
+}
+
+.dataInput {
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.block {
+  margin-left: 10px;
+}
+
+h6 {
+  margin: 0px;
+  font-size: 15px;
+}
+
+input {
+  border-radius: 3px;
+  width: 200px;
+  border: 0;
+}
+
+.button-add button {
+  background-color: #477f64;
+  border: 0;
+  width: 75px;
+  height: 20px;
+  margin: 14px;
+}
+
+#expenses {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: auto;
+  height: 600px;
+  overflow-y: scroll;
+}
+
+#expenses::-webkit-scrollbar {
+  width: 0;
+}
+
+#ticket {
+  margin-top: 5px;
+  width: 675px;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#name {
+  width: 300px;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+}
+
+#dateSumButt {
+  width: 375px;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#dateSum {
+  width: 280px;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#butt {
+  width: 90px;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+#ticket input {
+  margin-right: auto;
+}
+
+#name input {
+  width: 170px;
+  height: 16px;
+  padding: 0;
+}
+
+#inputDate {
+  width: 130px;
+}
+
+#inputSum {
+  width: 60px;
+}
+
+img {
+  width: 15px;
+  height: 15px;
+  margin: 15px;
+  cursor: pointer;
+}
+
+p {
+  cursor: pointer;
+}
+
+.numberTicket {
+  width: 20px;
+  padding-left: 18px;
+}
+
+.shop {
+  width: 240px;
+  word-break: break-all;
+}
+
+.date {
+  width: 150px;
+  align-items: center;
+}
+
+.sum {
+  width: 90px;
+  align-items: center;
+}
+
+#summ {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 700px;
+  font-size: 20px;
+}
+
+@media screen and (max-width: 730px) {
+  .button-add button {
+    margin: 0;
+  }
+
+  .dataInput {
+    flex-direction: column;
+  }
+
+  #expenses {
+    width: 500px;
+    height: 450px;
+  }
+
+  #ticket {
+    margin-top: 5px;
+    width: 470px;
+    height: auto;
+    flex-direction: column;
+  }
+
+  #name {
+    width: 420px;
+  }
+
+  #dateSumButt {
+    width: 360px;
+  }
+
+  #dateSum {
+    width: 260px;
+  }
+
+  #butt {
+    width: 70px;
+  }
+
+  #inputDate {
+    width: 130px;
+  }
+
+  #inputSum {
+    width: 60px;
+  }
+
+  #summ {
+    width: 500px;
+  }
+
+  .dataInput {
+    margin: 0px;
+  }
+  
+  .button-add {
+    margin: 10px;
+    padding-left: 128px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #expenses {
+    width: 300px;
+    height: 550px;
+  }
+
+  #ticket {
+    width: 325px;
+  }
+
+  #name {
+    width: 245px;
+  }
+
+  #dateSumButt {
+    flex-direction: column;
+    width: 110px;
+  }
+
+  #dateSum p {
+    margin: 10px;
+  }
+
+  #dateSum {
+    width: 110px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  #dateSum input {
+    margin: 0;
+    margin-bottom: 2px;
+  }
+
+  #name input {
+    margin: 0;
+    padding: 0;
+  }
+
+  #inputDate {
+    width: 170px;
+  }
+
+  #inputSum {
+    width: 167px;
+  }
+
+  img {
+    margin: 5px;
+  }
+
+  #summ {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  #expenses {
+    width: 260px;
+    height: 500px;
+  }
+
+  #ticket {
+    width: 250px;
+    margin-bottom: 10px;
+    flex-direction: column;
+  }
+
+  #name {
+    width: 240px;
+  }
+
+  #dateSumButt {
+    flex-direction: column;
+    width: 80px;
+  }
+
+  #dateSum {
+    width: 80px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  #dateSum p {
+    margin: 8px;
+  }
+
+  img {
+    margin: 2px;
+  }
+
+  #summ {
+    width: 260px;
+  }
+}
